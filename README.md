@@ -2,6 +2,8 @@
 
 为 OpenClaw 提供联网搜索能力的插件。通过飞书 / Telegram / WeCom 向 Agent 发消息，即可触发搜索、抓取网页、映射站点结构。
 
+![alt text](abst.png)
+
 > **推荐安装方式** 将 [INSTALL-PROMPT.md](INSTALL-PROMPT.md) 的内容发送给 **Claude Code（CC）**，AI 会一步步引导你完成全部配置，无需手动操作。
 
 > **致谢** 本项目的搜索提示词和工具设计参考了 [UltimateSearchSkill](https://github.com/ckckck/UltimateSearchSkill.git)，感谢原作者的开源贡献。

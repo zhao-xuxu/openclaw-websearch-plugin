@@ -1,0 +1,9 @@
+{
+  "name": "@openclaw/oc-websearch",
+  "version": "1.0.0",
+  "description": "OpenClaw Web Search Plugin - Grok AI + Tavily dual-engine search",
+  "type": "module",
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "oc-websearch",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "grokApiUrl": { "type": "string" },
+      "grokApiKey": { "type": "string" },
+      "grokModel": { "type": "string" },
+      "tavilyApiKeys": { "type": "array", "items": { "type": "string" } },
+      "firecrawlApiUrl": { "type": "string" },
+      "firecrawlApiKey": { "type": "string" }
+    }
+  }
+}

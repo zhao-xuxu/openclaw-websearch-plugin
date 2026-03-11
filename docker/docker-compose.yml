@@ -1,0 +1,24 @@
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: web-search-flaresolverr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Asia/Shanghai
+
+  grok2api:
+    image: ghcr.io/grok2api/grok2api:latest
+    container_name: web-search-grok2api
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${GROK2API_PORT:-8100}:8000"
+    volumes:
+      - ./data/grok2api:/app/data
+    environment:
+      - APP_KEY=${GROK2API_APP_KEY:-changeme}
+      - DATA_DIR=/app/data
+      - ENABLE_LOGGING=true
+      - STORAGE_TYPE=local
+    depends_on:
+      - flaresolverr

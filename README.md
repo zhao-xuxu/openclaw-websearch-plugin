@@ -59,6 +59,7 @@
 | `dual_search` | 双引擎并行搜索 | 同时调用 Grok + Tavily，合并结果 |
 | `ws_fetch` | 抓取网页内容 | 比浏览器轻量，直接拿内容，支持多 URL 批量 |
 | `ws_map` | 网站结构探索 | 发现站点 URL 结构，了解站点全貌 |
+| `exa_search` | 语义搜索 + 深度研究 | 支持 neural/fast/deep 模式，类别过滤（news/github/research paper 等），返回 highlights / 全文 / AI 摘要 |
 
 ---
 

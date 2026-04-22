@@ -7,6 +7,7 @@ import { registerTavilySearch } from "./src/tools/tavily-search.js";
 import { registerWebFetch } from "./src/tools/web-fetch.js";
 import { registerWebMap } from "./src/tools/web-map.js";
 import { registerDualSearch } from "./src/tools/dual-search.js";
+import { registerExaSearch } from "./src/tools/exa-search.js";
 
 const plugin = {
   id: "oc-websearch",
@@ -23,8 +24,9 @@ const plugin = {
     registerWebFetch(api, config, keyPool);
     registerWebMap(api, config, keyPool);
     registerDualSearch(api, config, keyPool);
+    registerExaSearch(api, config);
 
-    api.logger.info?.("oc-websearch: All 5 tools registered successfully");
+    api.logger.info?.("oc-websearch: All 6 tools registered successfully");
   },
 };
 

@@ -9,7 +9,8 @@
       "grokModel": { "type": "string" },
       "tavilyApiKeys": { "type": "array", "items": { "type": "string" } },
       "firecrawlApiUrl": { "type": "string" },
-      "firecrawlApiKey": { "type": "string" }
+      "firecrawlApiKey": { "type": "string" },
+      "exaApiKey": { "type": "string" }
     }
   }
 }

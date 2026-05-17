@@ -9,6 +9,7 @@ export interface WebSearchConfig {
   tavilyApiKeys: string[];
   firecrawlApiUrl: string;
   firecrawlApiKey: string;
+  exaApiKey: string;
 }
 
 const DEFAULTS: WebSearchConfig = {
@@ -18,6 +19,7 @@ const DEFAULTS: WebSearchConfig = {
   tavilyApiKeys: [],
   firecrawlApiUrl: "https://api.firecrawl.dev/v2",
   firecrawlApiKey: "",
+  exaApiKey: "",
 };
 
 /** Parse comma-separated string into array, filtering empty values. */
@@ -78,5 +80,6 @@ export function resolveConfig(pluginConfig?: Record<string, unknown>): WebSearch
     tavilyApiKeys: tavilyKeys.length > 0 ? tavilyKeys : tavilyKeysFromCfg,
     firecrawlApiUrl: get("FIRECRAWL_API_URL", "firecrawlApiUrl", DEFAULTS.firecrawlApiUrl).replace(/\/$/, ""),
     firecrawlApiKey: get("FIRECRAWL_API_KEY", "firecrawlApiKey", DEFAULTS.firecrawlApiKey),
+    exaApiKey: get("EXA_API_KEY", "exaApiKey", DEFAULTS.exaApiKey),
   };
 }

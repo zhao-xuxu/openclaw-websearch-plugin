@@ -60,7 +60,7 @@ journalctl --user -u openclaw-gateway -n 30 --no-pager | grep oc-websearch
 tail -30 ~/.openclaw/logs/gateway.log | grep oc-websearch
 ```
 
-看到 `oc-websearch: All 5 tools registered successfully` 即完成。
+看到 `oc-websearch: All 6 tools registered successfully` 即完成；启用 Parallel 时为 7 个工具。
 
 ---
 
@@ -101,6 +101,12 @@ oc-websearch/
 不需要 `npm install`，不需要编译，OpenClaw 直接加载 TypeScript。
 
 ### 第二步：配置 API Keys
+
+如果用户只需要免费免 Key 搜索，可在 `web-search.env` 写入 `PARALLEL_ENABLED=true`，
+跳过下面的 API Keys 配置，继续第三步。重启后让 Agent 明确使用 `parallel_search`；
+它通过 `https://search.parallel.ai/mcp` 返回来源链接和摘录，匿名调用有速率限制。
+这不会替代 Tavily、Grok 或 `dual_search`；使用这些工具时仍需各自的 Keys。
+设为 `PARALLEL_ENABLED=false` 可关闭 Parallel。
 
 编辑 `~/.openclaw/extensions/oc-websearch/web-search.env`，向用户询问以下信息：
 

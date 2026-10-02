@@ -1,5 +1,4 @@
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk/core";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/core";
 import { resolveConfig } from "./src/config.js";
 import { TavilyKeyPool } from "./src/tavily-key-pool.js";
 import { registerGrokSearch } from "./src/tools/grok-search.js";
@@ -8,6 +7,7 @@ import { registerWebFetch } from "./src/tools/web-fetch.js";
 import { registerWebMap } from "./src/tools/web-map.js";
 import { registerDualSearch } from "./src/tools/dual-search.js";
 import { registerExaSearch } from "./src/tools/exa-search.js";
+import { registerParallelSearch } from "./src/tools/parallel-search.js";
 
 const plugin = {
   id: "oc-websearch",
@@ -25,8 +25,9 @@ const plugin = {
     registerWebMap(api, config, keyPool);
     registerDualSearch(api, config, keyPool);
     registerExaSearch(api, config);
+    if (config.parallelEnabled) registerParallelSearch(api);
 
-    api.logger.info?.("oc-websearch: All 6 tools registered successfully");
+    api.logger.info?.(`oc-websearch: All ${config.parallelEnabled ? 7 : 6} tools registered successfully`);
   },
 };
 

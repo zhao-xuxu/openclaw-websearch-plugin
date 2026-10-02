@@ -60,6 +60,7 @@
 | `ws_fetch` | 抓取网页内容 | 比浏览器轻量，直接拿内容，支持多 URL 批量 |
 | `ws_map` | 网站结构探索 | 发现站点 URL 结构，了解站点全貌 |
 | `exa_search` | 语义搜索 + 深度研究 | 支持 neural/fast/deep 模式，类别过滤（news/github/research paper 等），返回 highlights / 全文 / AI 摘要 |
+| `parallel_search` | 免费免 Key 搜索（可选） | 通过 Parallel Search MCP 返回来源链接和相关摘录，默认关闭 |
 
 ---
 
@@ -127,10 +128,39 @@ openclaw gateway stop && openclaw gateway start
 看到以下日志即安装成功：
 
 ```
-[plugins] oc-websearch: All 5 tools registered successfully
+[plugins] oc-websearch: All 6 tools registered successfully
 ```
 
 ---
+
+## Parallel 搜索（可选，免 API Key）
+
+在 `web-search.env` 中添加 `PARALLEL_ENABLED=true`，或在
+`plugins.entries["oc-websearch"].config` 中设置 `"parallelEnabled": true`，重启 Gateway。
+默认关闭；启用后 Agent 可选择原生工具 `parallel_search`。已有工具、API Keys、
+`dual_search` 的 Grok + Tavily 组合和工具允许/拒绝规则保持原样。
+`web-search.env` 优先于 JSON 配置；设置 `PARALLEL_ENABLED=false` 可关闭该工具。
+
+```json
+{
+  "query": "查找 OpenClaw 插件安装文档",
+  "searchQueries": ["OpenClaw plugin installation docs"]
+}
+```
+
+只使用此工具时无需配置搜索 API Keys，也无需 Docker、npm 安装或编译。
+工具通过 Streamable HTTP 连接 `https://search.parallel.ai/mcp`，不读取或发送
+Parallel API Key。返回的文本包含来源 URL 和摘录，供 Agent 组织回答。
+匿名服务有速率限制，HTTP 429 等错误会返回给 Agent；不会自动切换其他搜索工具。
+可选 `sessionId` 是同一对话内复用的标识（最长 100 字符），不要放入个人信息。
+调用支持取消，整个 MCP 请求过程最多 120 秒。
+参见 [Parallel Search MCP 文档](https://docs.parallel.ai/integrations/mcp/search-mcp)。
+
+测试（Node.js >= 22.15）：
+
+```bash
+node --test --experimental-strip-types src/tools/*.test.ts
+```
 
 ## Grok 后端：两种方案
 

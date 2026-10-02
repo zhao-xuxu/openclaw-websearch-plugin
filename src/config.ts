@@ -10,6 +10,7 @@ export interface WebSearchConfig {
   firecrawlApiUrl: string;
   firecrawlApiKey: string;
   exaApiKey: string;
+  parallelEnabled: boolean;
 }
 
 const DEFAULTS: WebSearchConfig = {
@@ -20,6 +21,7 @@ const DEFAULTS: WebSearchConfig = {
   firecrawlApiUrl: "https://api.firecrawl.dev/v2",
   firecrawlApiKey: "",
   exaApiKey: "",
+  parallelEnabled: false,
 };
 
 /** Parse comma-separated string into array, filtering empty values. */
@@ -81,5 +83,8 @@ export function resolveConfig(pluginConfig?: Record<string, unknown>): WebSearch
     firecrawlApiUrl: get("FIRECRAWL_API_URL", "firecrawlApiUrl", DEFAULTS.firecrawlApiUrl).replace(/\/$/, ""),
     firecrawlApiKey: get("FIRECRAWL_API_KEY", "firecrawlApiKey", DEFAULTS.firecrawlApiKey),
     exaApiKey: get("EXA_API_KEY", "exaApiKey", DEFAULTS.exaApiKey),
+    parallelEnabled: dotenv.PARALLEL_ENABLED !== undefined
+      ? dotenv.PARALLEL_ENABLED.toLowerCase() === "true"
+      : cfg.parallelEnabled === true,
   };
 }
